@@ -11,9 +11,16 @@
 
 # Output of the go coverage tool, specifically when used with LiteIDE
 *.out
+
 /code/*
+!/code/Dockerfile
+!/code/wait-for-it.sh
+
 /mysql/data/*
 /mysql/log/*
+
 /redis/data/*
+
 /elas/data/*
+
 /app/runtime/*
