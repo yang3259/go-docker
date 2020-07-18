@@ -24,3 +24,5 @@
 /elas/data/*
 
 /app/runtime/*
+.DS_Store
+.idea
