@@ -1,0 +1,41 @@
+version: "3.7"
+
+services:
+  app:
+    build: ./code/discount/
+    ports:
+      - "8080:8080"
+    environment:
+      - GOPROXY=https://mirrors.aliyun.com/goproxy/
+    command: sh -c "./wait-for-it.sh mysql:3306 -- ./bubble ./conf/config.ini"
+    volumes:
+      - ./app/runtime:/app/runtime/:rw
+    depends_on:
+      - mysql
+      - redis
+  mysql:
+    image: mysql:5.7
+    container_name: mysql
+    volumes:
+      - ./mysql/data:/var/lib/mysql/:rw,cached
+      - ./mysql/log:/var/log/mysql/:rw,cached
+      - ./mysql/conf/conf.d:/etc/mysql/conf.d:rw
+    environment:
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - TZ=Asia/Shanghai
+    ports:
+      - "3306:3306"
+    restart: always
+  redis:
+    image: redis
+    container_name: redis
+    hostname: redis
+    restart: always
+    ports:
+      - 6379:6379
+    volumes:
+      - ./redis/conf/redis.conf:/etc/redis/redis.conf:rw
+      - ./redis/data:/data:rw
+    command:
+      redis-server /etc/redis/redis.conf --appendonly yes

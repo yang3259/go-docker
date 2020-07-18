@@ -1,0 +1,15 @@
+network.bind_host: 0.0.0.0
+cluster.name: elastic-cluster
+network.host: 0.0.0.0
+discovery.zen.minimum_master_nodes: 1
+bootstrap.memory_lock: true
+discovery.type: single-node
+http.cors.enabled: true
+http.cors.allow-origin: "*"
+
+
+#cluster.name 集群的名字，默认是docker-cluster
+#discovery.zen.minimum_master_nodes 如果你确定是单机模式，请设置为1，官方文档是这么说
+#bootstrap.memory_lock 如果你系统没有关闭交换分区，请把该参数设置为true
+#discovery.type 单节点模式
+#http.cors.enabled 和 http.cors.allow-origin 主要给elasticsearch-head插件跨域访问使用，否则一直报406的http错误
