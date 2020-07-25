@@ -46,6 +46,9 @@ RUN if [ ${CHANGE_SOURCE} = true ]; then \
     sed -i 's/security-cdn.debian.org/mirrors.tuna.tsinghua.edu.cn/' /etc/apt/sources.list \
 ;fi
 
+# 执行安装根证书命令
+RUN apk --no-cache add ca-certificates && update-ca-certificates
+
 RUN set -eux; \
 	apt-get update; \
 	apt-get install -y \
