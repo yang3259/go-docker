@@ -49,10 +49,9 @@ RUN if [ ${CHANGE_SOURCE} = true ]; then \
 # 执行安装根证书命令
 # 安装用于获取机器码的命令
 RUN apt-get update; 
-RUN apt-get clean && apt-get update;
-RUN apt-get install -y iproute2;
-RUN apt-get install -y dmidecode;
-RUN apt-get install -y hdparm;
+RUN apt-get install -y iproute2 \
+    dmidecode \
+    hdparm;
 #安装字体库
 RUN apt-get install -y fontconfig;
 # 设置字体字库
